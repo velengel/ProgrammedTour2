@@ -29,7 +29,7 @@ function Speak() {
         const synth = new SpeechSynthesisUtterance();
         var txt = document.getElementById("instruction");// テキストボックスを取得
         synth.text = txt.innerHTML; // 話す内容
-        if(phase==0) synth.text="命令：ジャイロセンサ許可　を押してスタート";
+        if (phase == 0) synth.text = "命令：ジャイロセンサ許可　を押してスタート";
         synth.lang = "ja-JP";   // 言語
         synth.rate = 1.2;       // 速さ
         synth.pitch = 1.0;       // 高さ
@@ -81,7 +81,7 @@ function displayData() {
     var radianAlpha = alpha * Math.PI / 180;
     //txt.innerHTML = radianAlpha;
     if (phase == 1 && Math.abs(radianAlpha + 3) <= 0.3) {
-        var programText=`あなたにプログラムされていた内容:
+        var programText = `あなたにプログラムされていた内容:
 1:[ LookAt(SmartPhone);                    ]
 2:[ Turn(Math.PI);                                ]`;
         alert(programText);
@@ -89,7 +89,7 @@ function displayData() {
 
     }
     if (phase == 3 && Math.abs(radianAlpha + 3) <= 0.3) {
-        var programText=`あなたにプログラムされていた内容:
+        var programText = `あなたにプログラムされていた内容:
 1:[LookAt(SmartPhone);                    ]
 2:[Turn(Math.PI);                                ]`;
         alert(programText);
@@ -97,8 +97,8 @@ function displayData() {
 
     }
 
-    var phaseBar=document.getElementById("progress");
-      phaseBar.value=phase;
+    var phaseBar = document.getElementById("progress");
+    phaseBar.value = phase;
 }
 
 function drawOrientation() {
@@ -106,6 +106,9 @@ function drawOrientation() {
     var centerY = canvas.height / 2;	        // canvasの中心のY座標
     var radius = 40;                          // 枠円の半径および針の長さ
     var radianAlpha = alpha * Math.PI / 180;    // 角度をラジアンに変換
+    if (navigator.userAgent.indexOf('Android') > 0) {
+        radianAlpha *= -1;
+    }
     context.clearRect(0, 0, canvas.width, canvas.height);   // canvasの内容を消す clearRect(x, y, w, h)
     context.beginPath();                        // 描画開始
     context.arc(centerX, centerY, radius, 0, 2 * Math.PI);  // 枠円を描く
@@ -125,14 +128,14 @@ function drawOrientation() {
 function displayInstruction() {
     var inst = document.getElementById("instruction");
     var txt = document.getElementById("txt")
-    var image=document.getElementById("image");
+    var image = document.getElementById("image");
     switch (phase) {
         case 0:
             inst.innerHTML = "命令：ジャイロセンサ許可👌を押してスタート";
             break;
         case 1:
             inst.innerHTML = "命令：後ろを向いてください。";
-            txt.innerHTML="";
+            txt.innerHTML = "";
             image.innerHTML = '<img src="./img/backman.png" width = 40% />';
             break;
         case 2:
@@ -148,7 +151,7 @@ function displayInstruction() {
             var all = document.getElementById("all");
             all.style.display = "none";
             var program = document.getElementById("program");
-            var programText=`
+            var programText = `
 Thank you. You were programmed as below:<br>
 
 <pre><code>
