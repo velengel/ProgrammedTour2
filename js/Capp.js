@@ -62,9 +62,7 @@ var countup = function() {
 var id = setInterval(function() {
     countup();
     if (count > 11) {
-        var programText = `time = 10\nwhile(time>0){\n  time -= 1\n  LookAt(SmartPhone)\n  //呼吸\n  Breath()\n  //まばたき\n  Blink()\n  //辺りを見回す\n  LookAround()\n}`;
-        alert(programText);
-        phase = 3;
+        createMordalWindow(phase);
         clearInterval(id);
 
     }
@@ -81,20 +79,22 @@ function displayData() {
     var radianAlpha = alpha * Math.PI / 180;
     //txt.innerHTML = radianAlpha;
     if (phase == 1 && Math.abs(radianAlpha + 3) <= 0.3) {
-        var programText = `あなたにプログラムされていた内容:\n//スマホを見ながら180°回転する\nLookAt(SmartPhone);\nTurn(Math.PI);`;
-        alert(programText);
-        phase++;
+        //var programText = `あなたにプログラムされていた内容:\n//スマホを見ながら180°回転する\nLookAt(SmartPhone);\nTurn(Math.PI);`;
+        //alert(programText);
+        //phase++;
+        createMordalWindow(phase);
 
     }
     if (phase == 3 && Math.abs(radianAlpha + 3) <= 0.3) {
-        var programText = `あなたにプログラムされていた内容:\n//スマホを見ながら180°回転する\nLookAt(SmartPhone);\nTurn(Math.PI);`;
-        alert(programText);
-        phase++;
-
+        //var programText = `あなたにプログラムされていた内容:\n//スマホを見ながら180°回転する\nLookAt(SmartPhone);\nTurn(Math.PI);`;
+        //alert(programText);
+        //phase++;
+        createMordalWindow(phase);
     }
 
     var phaseBar = document.getElementById("progress");
     phaseBar.value = phase;
+    console.log(phase);
 }
 
 function drawOrientation() {
@@ -163,31 +163,94 @@ def TurnAround():
     Turn(Math.PI)
 
 def main():
-    //命令１：後ろを向いてください。
+    # 命令１：後ろを向いてください。
     TurnAround()
-    //命令２：10秒間なにもしないでください。
+    # 命令２：10秒間なにもしないでください。
     time = 10
     while(time>0){
         time -= 1
         LookAt(SmartPhone)
-        //呼吸
+        # 呼吸
         Breath()
-        //まばたき
+        # まばたき
         Blink()
-        //辺りを見回す
+        # 辺りを見回す
         LookAround()
     }
-    //命令３：元の向きに戻ってください。
-    //命令１と同じ
+    # 命令３：元の向きに戻ってください。
+    # 命令１と同じ
     TurnAround()
 </code></pre>
 `;
             program.innerHTML = programText;
             hljs.initHighlightingOnLoad();
-
+            
             break;
 
 
 
     }
+}
+
+function createMordalWindow(phaseNumber) {
+    $(this).blur();
+    if ($("#modal-overlay")[0]) return false;
+    $("body").append('<div id="modal-overlay"></div>');
+    centeringModalSyncer();
+    $("#modal-overlay").fadeIn("slow");
+    $("#modal-content").fadeIn("slow");
+    switch (phaseNumber) {
+        case 1:
+            var programText = `<b>あなたにプログラムされていた内容：</b><br>
+            <pre>
+# スマホを見ながら180°回転する
+LookAt(SmartPhone)
+Turn(Math.PI)
+</pre>`
+            $("#ProgramText").html(programText);
+            break;
+        case 2:
+            var programText = `<b>あなたにプログラムされていた内容：</b><br>
+            <pre>
+//時間
+time = 10
+while(time>0){
+    time -= 1
+    LookAt(SmartPhone)
+    //呼吸
+    Breath()
+    //まばたき
+    Blink()
+    //辺りを見回す
+    LookAround()
+}<br>
+</pre>`
+            $("#ProgramText").html(programText);
+            break;
+        case 3:
+            var programText = `<b>あなたにプログラムされていた内容：</b><br>
+            <pre>
+# スマホを見ながら180°回転する
+LookAt(SmartPhone)
+Turn(Math.PI)
+</pre>`
+            $("#ProgramText").html(programText);
+            break;
+    }
+    $("#modal-overlay,#modal-close").unbind().click(function () {
+        $("#modal-overlay").remove();
+        $("#modal-content").css({ "display": "none" });
+        phase++;
+    });
+}
+
+function centeringModalSyncer() {
+    var w = $(window).width();
+    var h = $(window).height();
+    var cw = $("#modal-content").outerWidth({ margin: true });
+    var ch = $("#modal-content").outerHeight({ margin: true });
+    var pxleft = ((w - cw) / 2);
+    var pxtop = ((h - ch) / 2);
+    $("#modal-content").css({ "left": pxleft + "px" });
+    $("#modal-content").css({ "top": pxtop + "px" });
 }
