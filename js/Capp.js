@@ -167,7 +167,7 @@ def main():
     TurnAround()
     # 命令２：10秒間なにもしないでください。
     time = 10
-    while(time>0){
+    while time > 0 :
         time -= 1
         LookAt(SmartPhone)
         # 呼吸
@@ -176,7 +176,6 @@ def main():
         Blink()
         # 辺りを見回す
         LookAround()
-    }
     # 命令３：元の向きに戻ってください。
     # 命令１と同じ
     TurnAround()
@@ -184,7 +183,7 @@ def main():
 `;
             program.innerHTML = programText;
             hljs.initHighlightingOnLoad();
-            
+
             break;
 
 
@@ -237,7 +236,7 @@ Turn(Math.PI)
             $("#ProgramText").html(programText);
             break;
     }
-    $("#modal-overlay,#modal-close").unbind().click(function () {
+    $("#modal-overlay,#modal-close").unbind().click(function() {
         $("#modal-overlay").remove();
         $("#modal-content").css({ "display": "none" });
         phase++;
