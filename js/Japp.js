@@ -62,9 +62,7 @@ var countup = function() {
 var id = setInterval(function() {
     countup();
     if (count > 11) {
-        var programText = `time = 10\nwhile(time>0){\n  time -= 1\n  LookAt(SmartPhone)\n  //呼吸\n  Breath()\n  //まばたき\n  Blink()\n  //辺りを見回す\n  LookAround()\n}`;
-        alert(programText);
-        phase = 3;
+        createMordalWindow(phase);
         clearInterval(id);
 
     }
@@ -81,20 +79,22 @@ function displayData() {
     var radianAlpha = alpha * Math.PI / 180;
     //txt.innerHTML = radianAlpha;
     if (phase == 1 && Math.abs(radianAlpha + 3) <= 0.3) {
-        var programText = `あなたにプログラムされていた内容:\n//スマホを見ながら180°回転する\nLookAt(SmartPhone);\nTurn(Math.PI);`;
-        alert(programText);
-        phase++;
+        //var programText = `あなたにプログラムされていた内容:\n//スマホを見ながら180°回転する\nLookAt(SmartPhone);\nTurn(Math.PI);`;
+        //alert(programText);
+        //phase++;
+        createMordalWindow(phase);
 
     }
-    if (phase == 3 && Math.abs(radianAlpha + 3) <= 0.3) {
-        var programText = `あなたにプログラムされていた内容:\n//スマホを見ながら180°回転する\nLookAt(SmartPhone);\nTurn(Math.PI);`;
-        alert(programText);
-        phase++;
-
+    if (phase == 3 && Math.abs(radianAlpha) <= 0.3) {
+        //var programText = `あなたにプログラムされていた内容:\n//スマホを見ながら180°回転する\nLookAt(SmartPhone);\nTurn(Math.PI);`;
+        //alert(programText);
+        //phase++;
+        createMordalWindow(phase);
     }
 
     var phaseBar = document.getElementById("progress");
     phaseBar.value = phase;
+    //console.log(phase);
 }
 
 function drawOrientation() {
@@ -132,15 +132,15 @@ function displayInstruction() {
         case 1:
             inst.innerHTML = "命令１：後ろを向いてください。";
             txt.innerHTML = "";
-            image.innerHTML = '<img src="../img/backman.png" width = 40% />';
+            image.innerHTML = '<img src="../img/backman.png"  />';
             break;
         case 2:
             inst.innerHTML = "命令２：10秒間なにもしないでください。";
-            image.innerHTML = '<img src="../img/noneboy.png" width = 40% />';
+            image.innerHTML = '<img src="../img/noneboy.png"/>';
             break;
         case 3:
             inst.innerHTML = "命令３：元の向きに戻ってください。";
-            image.innerHTML = '<img src="../img/frontman.png" width = 40% />';
+            image.innerHTML = '<img src="../img/frontman.png" />';
             break;
         case 4:
             inst.innerHTML = "おつかれさまでした。";
@@ -152,42 +152,88 @@ function displayInstruction() {
 あなたにプログラムされていた内容は以下になります。<br>
 <b>無意識にやっている動作</b>や、<b>同じ動作</b>に気づけましたか？<br>
 
-<pre><code>
-//あなたの人生のライブラリをimport
-import YourBehavior
-
-//後ろを向く関数
-def TurnAround():
-//スマホを見ながら180°回転する
-    LookAt(SmartPhone)
-    Turn(Math.PI)
-
-def main():
-    //命令１：後ろを向いてください。
-    TurnAround()
-    //命令２：10秒間なにもしないでください。
-    time = 10
-    while(time>0){
-        time -= 1
-        LookAt(SmartPhone)
-        //呼吸
-        Breath()
-        //まばたき
-        Blink()
-        //辺りを見回す
-        LookAround()
-    }
-    //命令３：元の向きに戻ってください。
-    //命令１と同じ
-    TurnAround()
-</code></pre>
+<br>命令１:後ろを向いてください。<br>
+<pre>
+スマホを見る
+180°回転する
+</pre>
+<ul class="box-list">
+<img src="../img/smahoman.png"><img src="../img/RightArrow.png"><img src="../img/smahobackman.png" style="width: 20%;height: 20%;">
+</ul>
+<br>命令２：10秒間なにもしないでください。<br>
+<pre>
+10回繰り返す　　　 |   呼吸する
+  1秒カウントする　|　 まばたきする
+</pre>
+<ul class="box-list">
+<img src="../img/countman.png"><img src="../img/breath.png">
+</ul>
+<br>命令３：元の向きに戻ってください。<br>
+→ 命令１と<b>同じ</b>
+<pre>
+スマホを見る
+180°回転する
+</pre>
+<ul class="box-list">
+<img src="../img/smahoman.png"><img src="../img/RightArrow.png"><img src="../img/smahobackman.png" style="width: 20%;height: 20%;">
+</ul>
 `;
             program.innerHTML = programText;
-            hljs.initHighlightingOnLoad();
 
             break;
 
 
 
     }
+}
+
+function createMordalWindow(phaseNumber) {
+    $(this).blur();
+    if ($("#modal-overlay")[0]) return false;
+    $("body").append('<div id="modal-overlay"></div>');
+    centeringModalSyncer();
+    $("#modal-overlay").fadeIn("slow");
+    $("#modal-content").fadeIn("slow");
+    switch (phaseNumber) {
+        case 1:
+            var programText = `<b>あなたにプログラムされていた内容：</b><br>
+            <pre>
+スマホを見る
+180°回転する
+</pre>`
+            $("#ProgramText").html(programText);
+            break;
+        case 2:
+            var programText = `<b>あなたにプログラムされていた内容：</b><br>
+            <pre>
+10回繰り返す　　　 |   呼吸する
+  1秒カウントする　|　 まばたきする
+</pre>`
+            $("#ProgramText").html(programText);
+            break;
+        case 3:
+            var programText = `<b>あなたにプログラムされていた内容：</b><br>
+            <pre>
+スマホを見る
+180°回転する
+</pre>`
+            $("#ProgramText").html(programText);
+            break;
+    }
+    $("#modal-overlay,#modal-close").unbind().click(function() {
+        $("#modal-overlay").remove();
+        $("#modal-content").css({ "display": "none" });
+        phase++;
+    });
+}
+
+function centeringModalSyncer() {
+    var w = $(window).width();
+    var h = $(window).height();
+    var cw = $("#modal-content").outerWidth({ margin: true });
+    var ch = $("#modal-content").outerHeight({ margin: true });
+    var pxleft = ((w - cw) / 2);
+    var pxtop = ((h - ch) / 2);
+    $("#modal-content").css({ "left": pxleft + "px" });
+    $("#modal-content").css({ "top": pxtop + "px" });
 }

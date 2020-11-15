@@ -1,0 +1,73 @@
+#PageTitle {
+    text-align: center;
+    padding: 5px;
+    margin-bottom: 5px;
+    border: 5px double #333333;
+    border-radius: 10px;
+}
+
+.buttons {
+    text-align: center;
+    padding: 5px;
+    font-size: 1em;
+}
+
+.canvas-and-image {
+    display: flex;
+    text-align: center;
+}
+
+pre {
+    margin: 1em 0;
+    /* ブロック前後の余白 */
+    padding: 1em;
+    /* ブロック内の余白 */
+    border-radius: 5px;
+    /* 角丸 */
+    background: #25292f;
+    /* 背景色 */
+    color: #fff;
+    /* 文字色 */
+    white-space: pre-wrap;
+    /* はみ出たときに折り返す */
+}
+
+#modal-content {
+    width: 85%;
+    margin: 1.5em auto 0;
+    padding: 10px 20px;
+    border: 2px solid #aaa;
+    background-color: #fff;
+    z-index: 2;
+    position: absolute;
+    text-align: left;
+}
+
+.modal-p {
+    margin-top: 1em;
+}
+
+.modal-p:first-child {
+    margin-top: 0;
+}
+
+.button-link {
+    color: #00f;
+    text-decoration: underline;
+}
+
+.button-link:hover {
+    cursor: pointer;
+    color: #f00;
+}
+
+#modal-overlay {
+    z-index: 1;
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 120%;
+    background-color: rgba(0, 0, 0, 0.75);
+}
