@@ -213,7 +213,7 @@ Turn(Math.PI)
             <pre>
 //時間
 time = 10
-while(time>0){
+while time > 0 :
     time -= 1
     LookAt(SmartPhone)
     //呼吸
@@ -222,7 +222,7 @@ while(time>0){
     Blink()
     //辺りを見回す
     LookAround()
-}<br>
+<br>
 </pre>`
             $("#ProgramText").html(programText);
             break;
