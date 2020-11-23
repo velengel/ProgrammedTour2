@@ -153,12 +153,12 @@ function displayInstruction() {
 <b>無意識にやっている動作</b>や、<b>同じ動作</b>に気づけましたか？<br>
 
 <pre><code>
-//あなたの人生のライブラリをimport
+# あなたの人生のライブラリをimport
 import YourBehavior
 
-//後ろを向く関数
+# 後ろを向く関数
 def TurnAround():
-//スマホを見ながら180°回転する
+# スマホを見ながら180°回転する
     LookAt(SmartPhone)
     Turn(Math.PI)
 
@@ -211,16 +211,16 @@ Turn(Math.PI)
         case 2:
             var programText = `<b>あなたにプログラムされていた内容：</b><br>
             <pre>
-//時間
+# 時間
 time = 10
 while time > 0 :
     time -= 1
     LookAt(SmartPhone)
-    //呼吸
+    # 呼吸
     Breath()
-    //まばたき
+    # まばたき
     Blink()
-    //辺りを見回す
+    # 辺りを見回す
     LookAround()
 <br>
 </pre>`
