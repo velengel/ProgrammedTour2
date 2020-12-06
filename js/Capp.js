@@ -21,10 +21,13 @@ function deviceMotionRequest() {
     } else {
         alert('DeviceMotionEvent.requestPermission is not found')
     }
+    var gyrobutton = document.getElementById("gyrobutton");
+    gyrobutton.style.display="none";
     phase = 1;
+    
 }
 
-function Speak() {
+/*function Speak() {
     const btn = document.getElementById("btn");
     btn.addEventListener("click", () => {
         const synth = new SpeechSynthesisUtterance();
@@ -39,7 +42,7 @@ function Speak() {
     });
 
 }
-Speak();
+Speak();*/
 
 document.body.addEventListener('keydown',
     event => {
@@ -85,7 +88,7 @@ function displayData() {
         createMordalWindow(phase);
 
     }
-    if (phase == 3 && Math.abs(radianAlpha + 3) <= 0.3) {
+    if (phase == 3 && Math.abs(radianAlpha) <= 0.3) {
         //var programText = `あなたにプログラムされていた内容:\n//スマホを見ながら180°回転する\nLookAt(SmartPhone);\nTurn(Math.PI);`;
         //alert(programText);
         //phase++;
@@ -130,16 +133,19 @@ function displayInstruction() {
             inst.innerHTML = "命令：ジャイロセンサ許可👌を押してスタート";
             break;
         case 1:
-            inst.innerHTML = "命令１：後ろを向いてください。";
+            //var gyrobutton=document.getElementsById("gyrobutton");
+            //gyrobutton.style.display="none";
+    
+            inst.innerHTML = "命令１：<br>後ろを向いてください。";
             txt.innerHTML = "";
             image.innerHTML = '<img src="../img/backman.png" width = 40% />';
             break;
         case 2:
-            inst.innerHTML = "命令２：10秒間なにもしないでください。";
+            inst.innerHTML = "命令２：<br>10秒間なにもしないでください。";
             image.innerHTML = '<img src="../img/noneboy.png" width = 40% />';
             break;
         case 3:
-            inst.innerHTML = "命令３：元の向きに戻ってください。";
+            inst.innerHTML = "命令３：<br>元の向きに戻ってください。";
             image.innerHTML = '<img src="../img/frontman.png" width = 40% />';
             break;
         case 4:
@@ -236,7 +242,7 @@ Turn(Math.PI)
             $("#ProgramText").html(programText);
             break;
     }
-    $("#modal-overlay,#modal-close").unbind().click(function() {
+    $("#modal-close").unbind().click(function() {
         $("#modal-overlay").remove();
         $("#modal-content").css({ "display": "none" });
         phase++;

@@ -13,7 +13,7 @@
 <body>
     <div id="modal-content" style="display: none;">
         <p id="ProgramText">あなたにプログラムされていた内容：</p>
-        <p><a id="modal-close" class="button-link">とじる</a></p>
+        <p><a id="modal-close" class="button-link">つぎへ</a></p>
     </div>
     <div id="PageTitle">
         <h1>手続き型人生<br>体験ツアー2</h1>
@@ -27,13 +27,7 @@
 
     <div id="all">
 
-        <div class="buttons">
-            <input id="btn" type="button" style="width:80%;padding:10px;font-size:20px;" value="命令をしゃべる">
-        </div>
 
-        <div class="buttons">
-            <button onClick="deviceMotionRequest()" style="width:80%;padding:10px;font-size:20px;">ジャイロセンサ許可👌</button>
-        </div>
 
         <h2>
             <div id="instruction"></div>
@@ -60,6 +54,9 @@
     </div>
 
 
+    <div class="buttons">
+        <button id="gyrobutton" onClick="deviceMotionRequest()" style="width:80%;padding:10px;font-size:20px;">ジャイロセンサ許可👌</button>
+    </div>
 
 
 
