@@ -26,22 +26,19 @@ var phase = 0;
     phase = 1;
 
 }*/
+
 function deviceMotionRequest() {
-    window.addEventListener("deviceorientationabsolute", handleOrientation, true);
+    window.addEventListener("deviceorientation", (dat) => {
+        alpha = dat.alpha; // z軸（表裏）まわりの回転の角度（反時計回りがプラス）
+        beta = dat.beta; // x軸（左右）まわりの回転の角度（引き起こすとプラス）
+        gamma = dat.gamma; // y軸（上下）まわりの回転の角度（右に傾けるとプラス）
+    });
     var gyrobutton = document.getElementById("gyrobutton");
     gyrobutton.style.display = "none";
     phase = 1;
 
 }
 
-function handleOrientation(event) {
-    var absolute = event.absolute;
-    alpha = event.alpha;
-    beta = event.beta;
-    gamma = event.gamma;
-
-    // Do stuff with the new orientation data
-}
 
 /*function Speak() {
     const btn = document.getElementById("btn");
