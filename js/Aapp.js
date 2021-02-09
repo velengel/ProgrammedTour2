@@ -155,8 +155,8 @@ function displayInstruction() {
             //gyrobutton.style.display="none";
 
             inst.innerHTML = "命令１：<br>後ろを向いてください。";
-            //txt.innerHTML = "";
-            txt.innerHTML = initialAlpha;
+            txt.innerHTML = "";
+            //txt.innerHTML = initialAlpha;
             image.innerHTML = '<img src="../img/backman.png" width = 40% />';
             break;
         case 2:
