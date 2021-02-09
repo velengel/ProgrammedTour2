@@ -4,6 +4,8 @@ var alpha = 0,
 var canvas = document.getElementById("canvas"); // ★canvas要素を取得 
 var context = canvas.getContext("2d");
 var phase = 0;
+var initialAlpha=0;
+var radianAlpha=0;
 
 /*function deviceMotionRequest() {
     if (DeviceMotionEvent.requestPermission) {
@@ -35,7 +37,9 @@ function deviceMotionRequest() {
     });
     var gyrobutton = document.getElementById("gyrobutton");
     gyrobutton.style.display = "none";
+    
     phase = 1;
+    
 
 }
 
@@ -92,16 +96,17 @@ var timer2 = window.setInterval(() => {
 function displayData() {
     //var txt = document.getElementById("txt3");   // データを表示するdiv要素の取得
 
-    var radianAlpha = alpha * Math.PI / 180;
+    radianAlpha = alpha * Math.PI / 180;
+    if(initialAlpha <0.00001)initialAlpha = alpha*Math.PI/180;
     //txt.innerHTML = radianAlpha;
-    if (phase == 1 && Math.abs(radianAlpha + 3) <= 0.3) {
+    if (phase == 1 && Math.abs(radianAlpha-initialAlpha) >2.8) {
         //var programText = `あなたにプログラムされていた内容:\n//スマホを見ながら180°回転する\nLookAt(SmartPhone);\nTurn(Math.PI);`;
         //alert(programText);
         //phase++;
         createMordalWindow(phase);
 
     }
-    if (phase == 3 && Math.abs(radianAlpha) <= 0.3) {
+    if (phase == 3 && Math.abs(radianAlpha-initialAlpha) <0.3) {
         //var programText = `あなたにプログラムされていた内容:\n//スマホを見ながら180°回転する\nLookAt(SmartPhone);\nTurn(Math.PI);`;
         //alert(programText);
         //phase++;
@@ -150,7 +155,8 @@ function displayInstruction() {
             //gyrobutton.style.display="none";
 
             inst.innerHTML = "命令１：<br>後ろを向いてください。";
-            txt.innerHTML = "";
+            //txt.innerHTML = "";
+            txt.innerHTML = initialAlpha;
             image.innerHTML = '<img src="../img/backman.png" width = 40% />';
             break;
         case 2:
